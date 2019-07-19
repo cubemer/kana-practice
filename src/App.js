@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+
+class Display extends React.Component {
+  render() {
+    return(
+      <div className='Display'>
+        <p>む</p>
+      </div>)
+  }
+}
+
+class Input extends React.Component {
+  render() {
+    return(
+      <div className='Input'>
+        <input placeholder='ロマジ'></input>
+      </div>
+    )
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Display />
+      <Input />
     </div>
   );
 }
