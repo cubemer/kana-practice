@@ -3,19 +3,29 @@ import React from 'react';
 import './App.css';
 
 class Display extends React.Component {
+  hiragana = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'
+  
   render() {
     return(
       <div className='Display'>
-        <p>む</p>
+        <p>{this.hiragana[Math.floor(Math.random() * this.hiragana.length)]}</p>
       </div>)
   }
 }
 
 class Input extends React.Component {
+  state = {
+    answer: ''
+  }
+
+  answerHandler = (event) => {
+    this.setState({answer: event.value})
+  }
+
   render() {
     return(
       <div className='Input'>
-        <input placeholder='ロマジ'></input>
+        <input placeholder='enter your answer'></input>
       </div>
     )
   }
