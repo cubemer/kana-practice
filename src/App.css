@@ -1,4 +1,8 @@
 .Display {
+  text-align: center;
+}
+
+.Kana {
   margin: auto;
   width: 80%;
   text-align: center;

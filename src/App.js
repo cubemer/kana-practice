@@ -1,43 +1,49 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 
-class Display extends React.Component {
-  hiragana = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'
-  
-  render() {
-    return(
-      <div className='Display'>
-        <p>{this.hiragana[Math.floor(Math.random() * this.hiragana.length)]}</p>
-      </div>)
-  }
-}
+import Display from './components/Display/Display';
+import Input from './components/Input/Input';
 
-class Input extends React.Component {
+class App extends React.Component {
   state = {
-    answer: ''
+    kana: Math.floor(Math.random() * 46),
+    answer: '',
+    correct: false
   }
+
+  hiragana = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろやゆよわをん'
+  katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロヤユヨワヲン'
+  romaji = ['a',  'i',   'u',   'e',  'o',
+            'ka', 'ki',  'ku',  'ke', 'ko',
+            'sa', 'shi', 'su',  'se', 'so',
+            'ta', 'chi', 'tsu', 'te', 'to',
+            'na', 'ni',  'nu',  'ne', 'no',
+            'ha', 'hi',  'hu',  'he', 'ho',
+            'ma', 'mi',  'mu',  'me', 'mo',
+            'ra', 'ri',  'ru',  're', 'ro',
+            'ya', 'yu',  'yo',  'wa', 'wo',
+            'n' ]
 
   answerHandler = (event) => {
-    this.setState({answer: event.value})
+    this.setState({answer: event.target.value})
   }
 
   render() {
-    return(
-      <div className='Input'>
-        <input placeholder='enter your answer'></input>
-      </div>
-    )
-  }
-}
+    if (this.state.answer === this.romaji[this.state.kana]) {
+      console.log('you did it');
+      this.setState({
+        kana: Math.floor(Math.random() * 46),
+        answer: '',
+      })
+    }
 
-function App() {
-  return (
-    <div>
-      <Display />
-      <Input />
-    </div>
-  );
+    return (
+      <div>
+        <Display correct={this.state.correct} randomKana={this.hiragana[this.state.kana]}/>
+        <Input changed={this.answerHandler} value={this.state.answer}/>
+      </div>
+    );
+  }
 }
 
 export default App;
