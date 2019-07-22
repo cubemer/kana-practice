@@ -7,7 +7,6 @@ const input = (props) => (
       onChange={props.changed}
       value={props.value}
       autoFocus />
-    <p>{props.value}</p>
   </div>
 )
 
