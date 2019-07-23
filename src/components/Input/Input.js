@@ -6,6 +6,7 @@ const input = (props) => (
       type='text'
       onChange={props.changed}
       value={props.value}
+      // onKeyPress={props.keyPress}
       autoFocus />
   </div>
 )

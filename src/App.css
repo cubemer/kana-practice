@@ -7,7 +7,7 @@
   width: 80%;
   text-align: center;
   border: 2px solid black;
-  font-size: 10em;
+  font-size: 100px;
 }
 
 .Input {
@@ -26,4 +26,13 @@
 .Button {
   margin-top: 10px;
   text-align: center;
+}
+
+.Button button {
+  border: none;
+  border-radius: 4px;
+  padding: 10px 32px;
+  color: white;
+  background: rgb(202, 60, 60);
+  font-size: 15px;
 }
