@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.Score {
+  display: inline-block;
+  padding: 4px;
+  margin-inline: 10%;
+  border: 2px solid black;
+}
+
 .Kana {
   margin: auto;
   width: 80%;
