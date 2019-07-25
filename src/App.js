@@ -4,14 +4,20 @@ import './App.css';
 import Display from './components/Display/Display';
 import Input from './components/Input/Input';
 
-const hiragana = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろやゆよわをん'
-const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロヤユヨワヲン'
-const romaji = ['a',  'i',   'u',   'e',  'o',
+const hiragana = 'あいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもらりるれろやゆよわをん'
+const katakana = 'アイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモラリルレロヤユヨワヲン'
+const romaji = [
+          'a',  'i',   'u',   'e',  'o',
           'ka', 'ki',  'ku',  'ke', 'ko',
+          'ga', 'gi',  'gu',  'ge', 'go',
           'sa', 'shi', 'su',  'se', 'so',
+          'za', 'ji',  'zu',  'ze', 'zo',
           'ta', 'chi', 'tsu', 'te', 'to',
+          'da', 'di',  'du',  'de', 'do',
           'na', 'ni',  'nu',  'ne', 'no',
           'ha', 'hi',  'hu',  'he', 'ho',
+          'ba', 'bi',  'bu',  'be', 'bo',
+          'pa', 'pi',  'pu',  'pe', 'po',
           'ma', 'mi',  'mu',  'me', 'mo',
           'ra', 'ri',  'ru',  're', 'ro',
           'ya', 'yu',  'yo',  'wa', 'wo',
@@ -19,7 +25,7 @@ const romaji = ['a',  'i',   'u',   'e',  'o',
 
 class App extends React.Component {
   state = {
-    kana: Math.floor(Math.random() * 46),
+    kana: Math.floor(Math.random() * 71),
     answer: '',
     correct: false,
     hiragana: true,
@@ -45,6 +51,15 @@ class App extends React.Component {
   //     }
   //   }
   // }
+
+//  Debugger console log for the kana strings and the romaji array
+//   componentDidMount() {
+//     for( let i=0; i<hiragana.length; i++) {
+//       console.log(`hiragana: ${hiragana[i]}
+// katakana: ${katakana[i]}
+//   romaji: ${romaji[i]}`);
+//     }
+//   }
 
   componentDidUpdate() {
     if (this.state.answer.length === romaji[this.state.kana].length && this.state.answer !== romaji[this.state.kana]) {
