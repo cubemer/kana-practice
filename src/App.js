@@ -3,6 +3,7 @@ import './App.css';
 
 import Display from './components/Display/Display';
 import Input from './components/Input/Input';
+import Selector from './components/Selector/Selector';
 
 const hiragana = 'あいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもらりるれろやゆよわをん'
 const katakana = 'アイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモラリルレロヤユヨワヲン'
@@ -103,8 +104,9 @@ class App extends React.Component {
         }
         <Input changed={this.answerHandler} value={this.state.answer} />
         <div className='Button'>
-          <button className="pure-button" onClick={this.toggleHiraganaHandler} >{this.state.hiragana ? 'katakana' : 'hiragana'}</button>
+          <button onClick={this.toggleHiraganaHandler} >{this.state.hiragana ? 'katakana' : 'hiragana'}</button>
         </div>
+        <Selector className='Selector'/>
       </div>
     );
   }
