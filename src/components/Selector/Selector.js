@@ -15,17 +15,17 @@ import React from 'react';
 
 const selector = (props) => {
   return (
-    <form>
-      <label><input type='radio'/>あ</label>
-      <label><input type='radio'/>か</label>
-      <label><input type='radio'/>さ</label>
-      <label><input type='radio'/>た</label>
-      <label><input type='radio'/>な</label>
-      <label><input type='radio'/>は</label>
-      <label><input type='radio'/>ま</label>
-      <label><input type='radio'/>ら</label>
-      <label><input type='radio'/>や・わ</label>
-      <label><input type='radio'/>ん</label>
+    <form className='Selector'>
+      <label><input type='checkbox'/>あ</label>
+      <label><input type='checkbox'/>か</label>
+      <label><input type='checkbox'/>さ</label>
+      <label><input type='checkbox'/>た</label>
+      <label><input type='checkbox'/>な</label>
+      <label><input type='checkbox'/>は</label>
+      <label><input type='checkbox'/>ま</label>
+      <label><input type='checkbox'/>ら</label>
+      <label><input type='checkbox'/>や・わ</label>
+      <label><input type='checkbox'/>ん</label>
     </form>
   )
 
