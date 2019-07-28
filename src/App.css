@@ -44,6 +44,13 @@
   font-size: 15px;
 }
 
-.Selector label {
+.Checkboxes {
   display: block;
+  margin: auto;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.Checkbox {
+  display: inline-block;
 }

@@ -3,11 +3,11 @@ import './App.css';
 
 import Display from './components/Display/Display';
 import Input from './components/Input/Input';
-import Selector from './components/Selector/Selector';
+import Checkbox from './components/Checkbox/Checkbox';
 
-const hiragana = 'あいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもらりるれろやゆよわをん'
-const katakana = 'アイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモラリルレロヤユヨワヲン'
-const romaji = [
+const HIRAGANA = 'あいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもらりるれろやゆよわをん'
+const KATAKANA = 'アイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモラリルレロヤユヨワヲン'
+const ROMAJI = [
           'a',  'i',   'u',   'e',  'o',
           'ka', 'ki',  'ku',  'ke', 'ko',
           'ga', 'gi',  'gu',  'ge', 'go',
@@ -23,6 +23,7 @@ const romaji = [
           'ra', 'ri',  'ru',  're', 'ro',
           'ya', 'yu',  'yo',  'wa', 'wo',
           'n' ]
+const OPTIONS = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'ら', 'や', 'わ', 'ん'];
 
 class App extends React.Component {
   state = {
@@ -31,45 +32,21 @@ class App extends React.Component {
     correct: false,
     hiragana: true,
     counter: 0,
-    max: 0
+    max: 0,
+    checkboxes: OPTIONS.reduce((options, option) => ({
+      ...options,
+      [option]: false
+    }), {})
   }
 
-  // _handleKeyPress = (e) => {
-  //   console.log(e.key);
-  //   if (e.key === ' ') {
-  //     if (this.state.answer.length === romaji[this.state.kana].length && this.state.answer !== romaji[this.state.kana]) {
-  //       this.setState({
-  //         counter: 0,
-  //         answer: ''
-  //       })
-  //     }
-  //     if (this.state.answer === romaji[this.state.kana]) {
-  //       this.setState((prevState) => ({
-  //         kana: Math.floor(Math.random() * 46),
-  //         answer: '',
-  //         counter: prevState.counter + 1
-  //       }))
-  //     }
-  //   }
-  // }
-
-//  Debugger console log for the kana strings and the romaji array
-//   componentDidMount() {
-//     for( let i=0; i<hiragana.length; i++) {
-//       console.log(`hiragana: ${hiragana[i]}
-// katakana: ${katakana[i]}
-//   romaji: ${romaji[i]}`);
-//     }
-//   }
-
   componentDidUpdate() {
-    if (this.state.answer.length === romaji[this.state.kana].length && this.state.answer !== romaji[this.state.kana]) {
+    if (this.state.answer.length === ROMAJI[this.state.kana].length && this.state.answer !== ROMAJI[this.state.kana]) {
       this.setState({
         counter: 0,
         answer: ''
       })
     }
-    if (this.state.answer === romaji[this.state.kana]) {
+    if (this.state.answer === ROMAJI[this.state.kana]) {
       this.setState((prevState) => ({
         kana: Math.floor(Math.random() * 46),
         answer: '',
@@ -90,23 +67,46 @@ class App extends React.Component {
   toggleHiraganaHandler = () => {
     this.setState((prevState) => ({
       kana: Math.floor(Math.random() * 46),
-      hiragana: !prevState.hiragana,
+      HIRAGANA: !prevState.HIRAGANA,
       counter: 0,
     }))
   }
+
+  checkboxChangedHandler = event => {
+    const kana = event.target.name;
+    this.setState(prevState => ({
+      checkboxes: {
+        ...prevState.checkboxes,
+        [kana]: !prevState.checkboxes[kana]
+      }
+    }))
+  }
+
+  createCheckbox = option => (
+    <Checkbox
+      kana={option}
+      isSelected={this.state.checkboxes[option]}
+      checkboxChanged={this.checkboxChangedHandler}
+      key={option}
+    />
+  )
+
+  createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
   render() {
     return (
       <div>
         { this.state.hiragana
-          ? <Display randomKana={hiragana[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
-          : <Display randomKana={katakana[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
+          ? <Display randomKana={HIRAGANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
+          : <Display randomKana={KATAKANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
         }
         <Input changed={this.answerHandler} value={this.state.answer} />
         <div className='Button'>
           <button onClick={this.toggleHiraganaHandler} >{this.state.hiragana ? 'katakana' : 'hiragana'}</button>
         </div>
-        <Selector className='Selector'/>
+        <div className='Checkboxes'>
+          {this.createCheckboxes()}
+        </div>
       </div>
     );
   }
