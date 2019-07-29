@@ -5,8 +5,11 @@ import Display from './components/Display/Display';
 import Input from './components/Input/Input';
 import Checkbox from './components/Checkbox/Checkbox';
 
-const HIRAGANA = 'あいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもらりるれろやゆよわをん'
-const KATAKANA = 'アイウエオカキクケコガギグゲゴサシスセソザジズゼゾタチツテトダヂヅデドナニヌネノハヒフヘホバビブベボパピプペポマミムメモラリルレロヤユヨワヲン'
+const HIRAGANA = ['あいうえお', 'かきくけこ', 'がぎぐげご', 'さしすせそ', 'ざじずぜぞ', 'たちつてと', 'だぢづでど', 'なにぬねの', 'はひふへほ', 'ばびぶべぼ', 'ぱぴぷぺぽ', 'まみむめも', 'らりるれろ', 'やゆよ', 'わを', 'ん']
+const KATAKANA = ['アイウエオ', 'カキクケコ', 'ガギグゲゴ', 'サシスセソ', 'ザジズゼゾ', 'タチツテト', 'ダヂヅデド', 'ナニヌネノ', 'ハヒフヘホ', 'バビブベボ', 'パピプペポ', 'マミムメモ', 'ラリルレロ', 'ヤユヨ', 'ワヲ', 'ン']
+const KANA = HIRAGANA.reduce((accumulator, current) => (
+  accumulator += current
+))
 const ROMAJI = [
           'a',  'i',   'u',   'e',  'o',
           'ka', 'ki',  'ku',  'ke', 'ko',
@@ -27,7 +30,7 @@ const OPTIONS = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'ら', 'や', 
 
 class App extends React.Component {
   state = {
-    kana: Math.floor(Math.random() * 71),
+    kana: Math.floor(Math.random() * KANA.length),
     answer: '',
     correct: false,
     hiragana: true,
@@ -35,8 +38,13 @@ class App extends React.Component {
     max: 0,
     checkboxes: OPTIONS.reduce((options, option) => ({
       ...options,
-      [option]: false
+      [option]: true
     }), {})
+  }
+
+  componentDidMount() {
+    console.log(HIRAGANA);
+    console.log(KANA.length);
   }
 
   componentDidUpdate() {
@@ -97,8 +105,8 @@ class App extends React.Component {
     return (
       <div>
         { this.state.hiragana
-          ? <Display randomKana={HIRAGANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
-          : <Display randomKana={KATAKANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
+          ? <Display randomKana={KANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
+          : <Display randomKana={KANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
         }
         <Input changed={this.answerHandler} value={this.state.answer} />
         <div className='Button'>
