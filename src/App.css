@@ -53,4 +53,7 @@
 
 .Checkbox {
   display: inline-block;
+  border: 1px solid black;
+  padding: 1px;
+  margin: 3px;
 }
