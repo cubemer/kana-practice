@@ -7,9 +7,6 @@ import Checkbox from './components/Checkbox/Checkbox';
 
 const HIRAGANA = ['あいうえお', 'かきくけこ', 'がぎぐげご', 'さしすせそ', 'ざじずぜぞ', 'たちつてと', 'だぢづでど', 'なにぬねの', 'はひふへほ', 'ばびぶべぼ', 'ぱぴぷぺぽ', 'まみむめも', 'らりるれろ', 'やゆよ', 'わを', 'ん']
 const KATAKANA = ['アイウエオ', 'カキクケコ', 'ガギグゲゴ', 'サシスセソ', 'ザジズゼゾ', 'タチツテト', 'ダヂヅデド', 'ナニヌネノ', 'ハヒフヘホ', 'バビブベボ', 'パピプペポ', 'マミムメモ', 'ラリルレロ', 'ヤユヨ', 'ワヲ', 'ン']
-const KANA = HIRAGANA.reduce((accumulator, current) => (
-  accumulator += current
-))
 const ROMAJI = [
           'a',  'i',   'u',   'e',  'o',
           'ka', 'ki',  'ku',  'ke', 'ko',
@@ -30,7 +27,7 @@ const OPTIONS = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'ら', 'や', 
 
 class App extends React.Component {
   state = {
-    kana: Math.floor(Math.random() * KANA.length),
+    kanaIndex: 0,
     answer: '',
     correct: false,
     hiragana: true,
@@ -39,24 +36,33 @@ class App extends React.Component {
     checkboxes: OPTIONS.reduce((options, option) => ({
       ...options,
       [option]: true
-    }), {})
+    }), {}),
+    kana: ''
   }
 
   componentDidMount() {
     console.log(HIRAGANA);
-    console.log(KANA.length);
+    console.log(this.state.kana.length);
+    this.setState({
+      kana: HIRAGANA.reduce((accumulator, current) => (
+        accumulator += current
+      ))
+    })
+    this.setState({
+      kanaIndex: Math.floor(Math.random() * this.state.kana.length)
+    })
   }
 
   componentDidUpdate() {
-    if (this.state.answer.length === ROMAJI[this.state.kana].length && this.state.answer !== ROMAJI[this.state.kana]) {
+    if (this.state.answer.length === ROMAJI[this.state.kanaIndex].length && this.state.answer !== ROMAJI[this.state.kanaIndex]) {
       this.setState({
         counter: 0,
         answer: ''
       })
     }
-    if (this.state.answer === ROMAJI[this.state.kana]) {
+    if (this.state.answer === ROMAJI[this.state.kanaIndex]) {
       this.setState((prevState) => ({
-        kana: Math.floor(Math.random() * 46),
+        kanaIndex: Math.floor(Math.random() * 46),
         answer: '',
         counter: prevState.counter + 1
       }))
@@ -105,8 +111,8 @@ class App extends React.Component {
     return (
       <div>
         { this.state.hiragana
-          ? <Display randomKana={KANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
-          : <Display randomKana={KANA[this.state.kana]} counter={this.state.counter} highScore={this.state.max}/>
+          ? <Display randomKana={this.state.kana[this.state.kanaIndex]} counter={this.state.counter} highScore={this.state.max}/>
+          : <Display randomKana={this.state.kana[this.state.kanaIndex]} counter={this.state.counter} highScore={this.state.max}/>
         }
         <Input changed={this.answerHandler} value={this.state.answer} />
         <div className='Button'>
