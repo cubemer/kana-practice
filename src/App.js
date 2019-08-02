@@ -41,8 +41,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log(HIRAGANA);
-    console.log(this.state.kana.length);
+    // Set the kanaIndex and kana when the app loads
     this.setState({
       kana: HIRAGANA.reduce((accumulator, current) => (
         accumulator += current
@@ -54,6 +53,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
+    // Check to see if the answer is correct, if it is load a new kana
     if (this.state.answer.length === ROMAJI[this.state.kanaIndex].length && this.state.answer !== ROMAJI[this.state.kanaIndex]) {
       this.setState({
         counter: 0,
@@ -75,10 +75,12 @@ class App extends React.Component {
   }
 
   answerHandler = (event) => {
+    // this has to be set in order to check the answer in the app
     this.setState({answer: event.target.value})
   }
 
   toggleHiraganaHandler = () => {
+    // Holds the logic for switching between hiragana and katakana
     this.setState((prevState) => ({
       kana: Math.floor(Math.random() * 46),
       HIRAGANA: !prevState.HIRAGANA,
@@ -87,6 +89,7 @@ class App extends React.Component {
   }
 
   checkboxChangedHandler = event => {
+    // Add or remove kana groups from the available
     const kana = event.target.name;
     this.setState(prevState => ({
       checkboxes: {
@@ -97,6 +100,7 @@ class App extends React.Component {
   }
 
   createCheckbox = option => (
+    // This function is used to make the checkboxes
     <Checkbox
       kana={option}
       isSelected={this.state.checkboxes[option]}
@@ -105,6 +109,7 @@ class App extends React.Component {
     />
   )
 
+  // Execute the checkbox function with the appropriate 
   createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
   render() {
