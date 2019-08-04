@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 
-import Display from './components/Display/Display';
-import Input from './components/Input/Input';
-import Checkbox from './components/Checkbox/Checkbox';
+import Display from '../../components/Display/Display';
+import Input from '../../components/Input/Input';
+import Checkbox from '../../components/Checkbox/Checkbox';
 
 const HIRAGANA = ['あいうえお', 'かきくけこ', 'がぎぐげご', 'さしすせそ', 'ざじずぜぞ', 'たちつてと', 'だぢづでど', 'なにぬねの', 'はひふへほ', 'ばびぶべぼ', 'ぱぴぷぺぽ', 'まみむめも', 'らりるれろ', 'やゆよ', 'わを', 'ん']
 const KATAKANA = ['アイウエオ', 'カキクケコ', 'ガギグゲゴ', 'サシスセソ', 'ザジズゼゾ', 'タチツテト', 'ダヂヅデド', 'ナニヌネノ', 'ハヒフヘホ', 'バビブベボ', 'パピプペポ', 'マミムメモ', 'ラリルレロ', 'ヤユヨ', 'ワヲ', 'ン']
